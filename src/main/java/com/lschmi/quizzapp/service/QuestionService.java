@@ -35,7 +35,12 @@ public class QuestionService {
     }
 
     public ResponseEntity<String> addQuestion(Question question) {
-        questionDao.save(question);
-        return new ResponseEntity<>("success", HttpStatus.CREATED);
+        try {
+            questionDao.save(question);
+            return new ResponseEntity<>("Question added successfully", HttpStatus.CREATED);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>("Error while adding question", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
