@@ -1,7 +1,6 @@
 package com.lschmi.quizzapp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +19,6 @@ public class QuizController {
     //if you want to acces the url variables use RequestParam
     @PostMapping("create")
     public ResponseEntity<String> createQuiz(@RequestParam String category, @RequestParam int numQ, @RequestParam String title) {
-        return new ResponseEntity<>("I'm here", HttpStatus.OK);
+        return quizService.createQuiz(category, numQ, title);
     }
 }

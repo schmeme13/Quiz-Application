@@ -7,8 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import com.lschmi.quizzapp.Question;
+
 import com.lschmi.quizzapp.dao.QuestionDAO;
+import com.lschmi.quizzapp.model.Question;
 
 @Service
 public class QuestionService {
