@@ -1,4 +1,4 @@
-package com.lschmi.quizzapp;
+package com.lschmi.quizzapp.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
