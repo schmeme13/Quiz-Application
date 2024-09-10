@@ -15,6 +15,7 @@ import com.lschmi.quizzapp.dao.QuizDao;
 import com.lschmi.quizzapp.model.Question;
 import com.lschmi.quizzapp.model.QuestionWrapper;
 import com.lschmi.quizzapp.model.Quiz;
+import com.lschmi.quizzapp.model.Response;
 
 @Service
 public class QuizService {
@@ -57,6 +58,33 @@ public class QuizService {
         }
 
         return new ResponseEntity<>(questionsForUser, HttpStatus.OK);
+    }
+
+
+    public ResponseEntity<Integer> calculateResult(Integer id, List<Response> responses) {
+        //Optional is better than .get() because it checks whether it's there or not
+        Quiz quiz = quizDao.findById(id).get();
+        List<Question> questions = quiz.getQuestions();
+
+        //Optional<Quiz> quiz = quizDao.findById(id);
+        //List<Question> questions = quiz.get().getQuestions();
+
+        int right = 0;
+
+        for (Response response : responses) {
+        // Find the question that matches the response's question id
+        for (Question question : questions) {
+            if (question.getId().equals(response.getId())) {
+                // Compare the user answer with the correct answer
+                if (response.getResponse().equals(question.getRightAnswer())) {
+                    right++;
+                }
+                break; // Exit inner loop once the question is matched
+            }
+        }
+    }
+
+        return new ResponseEntity<>(right, HttpStatus.OK);
     }
     
  
