@@ -1,25 +1,38 @@
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import './App.css';
 
 function App() {
+  const [questions, setQuestions] = useState([]);
+
+  // Function to fetch questions from backend
+  const fetchQuestions = async () => {
+    try {
+      const response = await axios.get('http://localhost:8080/question/category/java');
+      setQuestions(response.data);
+    } catch (error) {
+      console.error('Error fetching questions:', error);
+    }
+  };
+
+  // Fetch questions on component mount
+  useEffect(() => {
+    fetchQuestions();
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Questions in Java Category</h1>
+        <ul>
+          {questions.map((question) => (
+            <li key={question.id}>{question.questionTitle}</li>
+          ))}
+        </ul>
       </header>
     </div>
   );
 }
 
 export default App;
+
