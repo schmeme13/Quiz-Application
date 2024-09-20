@@ -35,12 +35,10 @@ const QuestionDetail = () => {
     return (
         <div>
             <h2>{question.questionTitle}</h2>
-            <ul>
-                <li>Option 1: {question.option1}</li>
-                <li>Option 2: {question.option2}</li>
-                <li>Option 3: {question.option3}</li>
-                <li>Option 4: {question.option4}</li>
-            </ul>
+            <p>Option 1: {question.option1}</p>
+            <p>Option 2: {question.option2}</p>
+            <p>Option 3: {question.option3}</p>
+            <p>Option 4: {question.option4}</p>
             <p>Correct Answer: {question.rightAnswer}</p>
             <p>Difficulty Level: {question.difficulty_level}</p>
             <p>Category: {question.category}</p>
