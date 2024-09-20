@@ -2,6 +2,7 @@ package com.lschmi.quizzapp.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -44,4 +45,12 @@ public class QuestionService {
         }
         return new ResponseEntity<>("Error while adding question", HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    public ResponseEntity<Question> getQuestionById(Integer id) {
+        Optional<Question> question = questionDao.findById(id);
+        return question.map(q -> new ResponseEntity<>(q, HttpStatus.OK))
+                       .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+    
+    
 }
