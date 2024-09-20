@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { Box, Button, Typography, Card, CardContent, MenuItem, TextField } from '@mui/material';
+import { Box, Button, Typography, Card, CardContent, MenuItem, TextField, Grid } from '@mui/material';
 
 const QuestionList = () => {
   const [questions, setQuestions] = useState([]);
@@ -69,7 +69,17 @@ const QuestionList = () => {
             variant="outlined"
             value={category}
             onChange={handleCategoryChange}
-            style={{ marginRight: '10px' }}
+            style={{ 
+              marginRight: '10px',
+              width: '200px',
+              height: '36px'
+            }}
+            InputProps={{
+              style: {
+                height: '36px',
+                textAlign: 'left'
+              }
+            }}
           >
             <MenuItem value="java">Java</MenuItem>
             <MenuItem value="python">Python</MenuItem>
@@ -84,13 +94,20 @@ const QuestionList = () => {
       )}
 
       {questions.map((question) => (
-        <Card key={question.id} style={{ margin: '10px 0' }}>
+        <Card key={question.id} style={{ margin: '10px 0', display: 'flex', justifyContent: 'space-between' }}>
           <CardContent>
-            <Typography variant="h6">{question.questionTitle}</Typography>
-            <Button component={Link} to={`/question/${question.id}`} variant="contained">
-              View Details
-            </Button>
+            <Typography variant="h6" style={{ textAlign: 'left' }}>
+              {question.questionTitle}
+            </Typography>
           </CardContent>
+          <Button 
+            component={Link} 
+            to={`/question/${question.id}`} 
+            state={{ filteredQuestions: questions }}  // Pass the filtered list as state
+            variant="contained"
+          >
+            View Details
+          </Button>
         </Card>
       ))}
     </Box>
