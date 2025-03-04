@@ -6,8 +6,6 @@ import theme from './theme'; // Import your custom theme
 import QuestionList from './components/QuestionList';
 import AddQuestionForm from './components/AddQuestionForm';
 import QuestionDetail from './components/QuestionDetail'; // Import the new component
-import QuizList from './QuizList';
-import QuizDetail from './QuizDetail';
 import './App.css';
 
 // Updated TopBar component
@@ -70,8 +68,6 @@ function App() {
                 <Route path="/" element={<QuestionList />} />
                 <Route path="/add-question" element={<AddQuestionForm />} />
                 <Route path="/question/:questionId" element={<QuestionDetail />} />
-                <Route path="/" element={<QuizList />} />
-                <Route path="/quiz/:id" element={<QuizDetail />} />
               </Routes>
             </Box>
           </Container>
