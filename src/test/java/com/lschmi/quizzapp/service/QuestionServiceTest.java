@@ -18,20 +18,19 @@ import static org.mockito.Mockito.when;
 public class QuestionServiceTest {
 
     @Mock
-    private QuestionDAO questionDAO;
+    private QuestionDAO questionDAO; //Fake DAO, so we don’t hit the actual database
 
     @InjectMocks
-    private QuestionService questionService;
+    private QuestionService questionService; //The service we're testing
 
     @BeforeEach
     public void setUp() {
-        MockitoAnnotations.openMocks(this); // Initialize mocks
+        MockitoAnnotations.openMocks(this); //Sets up mock objects before each test runs
     }
 
     @Test
     public void testGetAllQuestions() {
-        // Given
-        // Create questions with default constructor (no arguments)
+        //Manually creating a couple of sample questions
         Question question1 = new Question();
         question1.setId(1);
         question1.setQuestionTitle("Question 1");
@@ -46,13 +45,13 @@ public class QuestionServiceTest {
 
         List<Question> questions = Arrays.asList(question1, question2);
 
-        // When
-        when(questionDAO.findAll()).thenReturn(questions);
-
-        // Then
+        //When
+        when(questionDAO.findAll()).thenReturn(questions); //Simulating database returning these questions
+        //Then
         ResponseEntity<List<Question>> response = questionService.getAllQuestions();
-        assertEquals(200, response.getStatusCodeValue());
-        assertEquals(2, response.getBody().size());
-        assertEquals("Question 1", response.getBody().get(0).getQuestionTitle()); // Correct method
+
+        assertEquals(200, response.getStatusCodeValue()); //Checking if the response is OK
+        assertEquals(2, response.getBody().size()); //Making sure we got both questions back
+        assertEquals("Question 1", response.getBody().get(0).getQuestionTitle()); //Confirming the first question’s title
     }
 }
