@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class QuizzappApplication {
 
 	public static void main(String[] args) {
+		//mvn spring-boot:run
 		SpringApplication.run(QuizzappApplication.class, args);
 	}
 
