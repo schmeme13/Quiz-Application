@@ -16,7 +16,7 @@ public class QuestionServiceIntegrationTest {
 
     @Test
     public void testAddAndGetQuestionByCategory() {
-        //Given: Create a new question
+        // Given: Create a new question
         Question question = new Question();
         question.setQuestionTitle("What is the primary purpose of Amazon S3?");
         question.setOption1("Storing relational databases");
@@ -27,17 +27,17 @@ public class QuestionServiceIntegrationTest {
         question.setDifficulty_level("Easy");
         question.setCategory("AWS S3");
 
-
-        //When: Add the question using the service
+        // When: Add the question using the service
         questionService.addQuestion(question);
 
-        //Then: Verify the question is saved by fetching it by category
-        var response = questionService.getQuestionsByCategory("Geography");
+        // Then: Verify the question is saved by fetching it by category
+        var response = questionService.getQuestionsByCategory("AWS S3");
 
         assertThat(response.getBody()).isNotNull();
         assertThat(response.getBody()).isNotEmpty();
-        assertThat(response.getBody().get(0).getQuestionTitle()).isEqualTo("What is the capital of France?");
+        assertThat(response.getBody().get(0).getQuestionTitle()).isEqualTo("What is the primary purpose of Amazon S3?");
     }
+
 
     @Test
     public void testGetAllQuestions() {
